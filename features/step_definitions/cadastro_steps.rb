@@ -18,11 +18,16 @@ Dado('preencho os campos do formulário com {string}, {string}, {string}, {strin
   @app.cadastropage.preencher_form_com_dados_de_exemplos(gender, first_name, last_name, password, day, month, year,newsletter, company, address, city, state, zipcode, mobilephone, address_name )
 end
 
+Dado('preencho os campos do formulário com dados válidos padrão') do
+ @app.cadastropage.preencher_form_com_dados_datafile
+end
+
 Quando('confirmo o cadastro') do
   @app.cadastropage.confirmar_cadastro
  end
  
 Entao('deve ser direcionado a pagina de minha conta') do
+  sleep 5
   expect(@app.minhacontapage.title_page.text).to eq('MY ACCOUNT')
   expect(@app.minhacontapage.account_name.text).to eq(@app.cadastropage.account_full_name)
 end
